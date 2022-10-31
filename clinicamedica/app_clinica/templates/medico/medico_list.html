@@ -1,0 +1,62 @@
+{% extends 'list.html' %}
+{% load static %}
+{% block head_list %}
+    <script src="{% static 'medico/js/list_medico.js' %}"></script>
+{% endblock %}
+
+{% block columns %}
+    <tr>
+        <th scope="col" style="width: 0%;">No.</th>
+        <th scope="col" style="width: 10%;">1er. Nombre</th>
+        <th scope="col" style="width: 10%;">2do. Nombre</th>
+        <th scope="col" style="width: 10%;">1er. Apellido</th>
+        <th scope="col" style="width: 10%;">2do. Apellido</th>
+        <th scope="col" style="width: 10%;">DPI</th>
+        <th scope="col" style="width: 10%;">Fecha Nac</th>
+        <th scope="col" style="width: 30%;">Direccion</th>
+        <th scope="col" style="width: 05%;">Email</th>
+        <th scope="col" style="width: 00%;">Titulo Academico</th>
+        <th scope="col" style="width: 00%;">No. Colegiado Activo</th>
+        <th scope="col" style="width: 10%">Telefono</th>
+        <th scope="col" style="width: 10%">Genero</th>
+        <th scope="col" style="width: 10%">Religion</th>
+        <th scope="col" style="width: 15%">Opciones</th>
+    </tr>
+{% endblock %}
+
+
+{% block rows %}
+    {% for obj in object_list %}
+        <tr>
+            <td>{{ obj.id }}</td>
+            <td>{{ obj.pnombre_med }}</td>
+            <td>{{ obj.snombre_med }}</td>
+            <td>{{ obj.papellido_med }}</td>
+            <td>{{ obj.sapellido_med }}</td>
+            <td>{{ obj.dpi_med }}</td>
+            <td>{{ obj.fecha_nac_med }}</td>
+            <td>{{ obj.direccion_med }}</td>
+            <td>{{ obj.email_med }}</td>
+            <td>{{ obj.titulo_medico }}</td>
+            <td>{{ obj.colegiado_act }}</td>
+            <td>{{ obj.telefono_med }}</td>
+            <td>{{ obj.sexo_med }}</td>
+            <td>{{ obj.religion_med }}</td>
+
+
+            {#            <td class="text-center">#}
+            {#                 {{ obj.image }}#}
+            {#                <img src="{{ obj.get_image }}" class="img-fluid d-block mx-auto" style="width: 20px; height: 20px;">#}
+            {#            </td>#}
+{#            <td>{{ obj.pvp }}</td>#}
+            <td class="text-center">
+                <a href="{% url 'medico_editar' obj.id%}" class="btn btn-warning btn-xs btn-flat">
+                    <i class="fas fa-edit"></i>
+                </a>
+                <a href="{% url 'medico_eliminar' obj.id %}" class="btn btn-danger btn-xs btn-flat">
+                    <i class="fas fa-trash"></i>
+                </a>
+            </td>
+        </tr>
+    {% endfor %}
+{% endblock %}

@@ -1,0 +1,47 @@
+{% extends 'list.html' %}
+{% load static %}
+{% block head_list %}
+    <script src="{% static 'consulta/js/consulta_lista.js' %}"></script>
+{% endblock %}
+
+{% block columns %}
+    <tr>
+        <th scope="col" style="width: 0%;">No.</th>
+        <th scope="col" style="width: 0%;">Motivo consulta.</th>
+        <th scope="col" style="width: 10%;">Paciente</th>
+        <th scope="col" style="width: 10%;">Medico</th>
+        <th scope="col" style="width: 10%;">Fecha Consulta</th>
+        <th scope="col" style="width: 10%;">Diagnostico</th>
+        <th scope="col" style="width: 10%;">observacion</th>
+        <th scope="col" style="width: 10%;">Opciones</th>
+    </tr>
+{% endblock %}
+
+
+{% block rows %}
+    {% for obj in object_list %}
+        <tr>
+            <td>{{ obj.id }}</td>
+            <td>{{ obj.motivo_consulta }}</td>
+            <td>{{ obj.paciente.pnombre_pac }} {{ obj.paciente.snombre_pac  }} {{ obj.paciente.papellido_pac }} {{ obj.paciente.sapellido_pac }}</td>
+            <td>{{ obj.medico.pnombre_med }} {{ obj.medico.snombre_med  }} {{ obj.medico.papellido_med }} {{ obj.medico.sapellido_med }}</td>
+            <td>{{ obj.fecha_consulta }}</td>
+            <td>{{ obj.diagnostico }}</td>
+            <td>{{ obj.observacion }}</td>
+
+            {#            <td class="text-center">#}
+            {#                 {{ obj.image }}#}
+            {#                <img src="{{ obj.get_image }}" class="img-fluid d-block mx-auto" style="width: 20px; height: 20px;">#}
+            {#            </td>#}
+{#            <td>{{ obj.pvp }}</td>#}
+            <td class="text-center">
+                <a href="{% url 'consulta_editar' obj.id %}" class="btn btn-warning btn-xs btn-flat">
+                    <i class="fas fa-edit"></i>
+                </a>
+                <a href="{% url 'consulta_eliminar' obj.id %}" class="btn btn-danger btn-xs btn-flat">
+                    <i class="fas fa-trash"></i>
+                </a>
+            </td>
+        </tr>
+    {% endfor %}
+{% endblock %}
